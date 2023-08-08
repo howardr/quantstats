@@ -259,7 +259,6 @@ def _prepare_benchmark(benchmark=None, period="max", rf=0.0, prepare_returns=Tru
         benchmark = benchmark[benchmark.columns[0]].copy()
 
     if isinstance(period, _pd.DatetimeIndex) and set(period) != set(benchmark.index):
-
         # Adjust Benchmark to Strategy frequency
         benchmark_prices = to_prices(benchmark, base=1)
         new_index = _pd.date_range(start=period[0], end=period[-1], freq="D")
@@ -397,7 +396,7 @@ def make_index(
 
     # drop when all are NaN
     index.dropna(how="all", inplace=True)
-    return index[index.index <= last_day].sum(axis=1)
+    return index[index.index <= last_day][portfolio.keys()].sum(axis=1)
 
 
 def make_portfolio(returns, start_balance=1e5, mode="comp", round_to=None):

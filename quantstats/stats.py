@@ -311,7 +311,6 @@ def rolling_sharpe(
     periods_per_year=252,
     prepare_returns=True,
 ):
-
     if rf != 0 and rolling_period is None:
         raise Exception("Must provide periods if rf != 0")
 
@@ -393,7 +392,6 @@ def adjusted_sortino(returns, rf=0, periods=252, annualize=True, smart=False):
 def probabilistic_ratio(
     series, rf=0.0, base="sharpe", periods=252, annualize=False, smart=False
 ):
-
     if base.lower() == "sharpe":
         base = sharpe(series, periods=periods, annualize=False, smart=smart)
     elif base.lower() == "sortino":
@@ -512,7 +510,7 @@ def gain_to_pain_ratio(returns, rf=0, resolution="D"):
     return returns.sum() / downside
 
 
-def cagr(returns, rf=0.0, compounded=True, periods=252):
+def cagr(returns, rf=0.0, compounded=True):
     """
     Calculates the communicative annualized growth return
     (CAGR%) of access returns
@@ -526,7 +524,7 @@ def cagr(returns, rf=0.0, compounded=True, periods=252):
     else:
         total = _np.sum(total)
 
-    years = (returns.index[-1] - returns.index[0]).days / periods
+    years = (returns.index[-1] - returns.index[0]).days / 365
 
     res = abs(total + 1.0) ** (1.0 / years) - 1
 
@@ -747,7 +745,7 @@ def outlier_loss_ratio(returns, quantile=0.01, prepare_returns=True):
     return returns.quantile(quantile).mean() / returns[returns < 0].mean()
 
 
-def recovery_factor(returns, rf=0., prepare_returns=True):
+def recovery_factor(returns, rf=0.0, prepare_returns=True):
     """Measures how fast the strategy recovers from drawdowns"""
     if prepare_returns:
         returns = _utils._prepare_returns(returns)
