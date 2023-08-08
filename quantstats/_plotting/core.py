@@ -112,7 +112,6 @@ def plot_returns_bars(
     savefig=None,
     show=True,
 ):
-
     if match_volatility and benchmark is None:
         raise ValueError("match_volatility requires passing of " "benchmark.")
     if match_volatility and benchmark is not None:
@@ -265,7 +264,6 @@ def plot_timeseries(
     savefig=None,
     show=True,
 ):
-
     colors, ls, alpha = _get_colors(grayscale)
 
     returns.fillna(0, inplace=True)
@@ -419,7 +417,6 @@ def plot_histogram(
     savefig=None,
     show=True,
 ):
-
     # colors = ['#348dc1', '#003366', 'red']
     # if grayscale:
     #     colors = ['silver', 'gray', 'black']
@@ -616,7 +613,6 @@ def plot_rolling_stats(
     savefig=None,
     show=True,
 ):
-
     colors, _, _ = _get_colors(grayscale)
 
     fig, ax = _plt.subplots(figsize=figsize)
@@ -745,7 +741,6 @@ def plot_rolling_beta(
     savefig=None,
     show=True,
 ):
-
     colors, _, _ = _get_colors(grayscale)
 
     fig, ax = _plt.subplots(figsize=figsize)
@@ -889,7 +884,6 @@ def plot_longest_drawdowns(
     savefig=None,
     show=True,
 ):
-
     colors = ["#348dc1", "#003366", "red"]
     if grayscale:
         colors = ["#000000"] * 3
@@ -907,7 +901,7 @@ def plot_longest_drawdowns(
     ax.spines["left"].set_visible(False)
 
     fig.suptitle(
-        f"{title} - Worst %.0f Drawdown Periods" % periods,
+        f"{title} - Worst {int(periods)} Drawdown Periods",
         y=0.94,
         fontweight="bold",
         fontname=fontname,
@@ -1001,7 +995,6 @@ def plot_distribution(
     savefig=None,
     show=True,
 ):
-
     colors = _FLATUI_COLORS
     if grayscale:
         colors = ["#f9f9f9", "#dddddd", "#bbbbbb", "#999999", "#808080"]
@@ -1118,7 +1111,6 @@ def plot_table(
     savefig=None,
     show=False,
 ):
-
     if columns is not None:
         try:
             tbl.columns = columns
